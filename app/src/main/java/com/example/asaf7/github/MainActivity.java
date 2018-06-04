@@ -24,27 +24,32 @@ public class MainActivity extends AppCompatActivity {
 
         progressBar = findViewById(R.id.progress_bar);
         btn = findViewById(R.id.btn);
-        tvTime = findViewById(R.id.tv_time);
+        tvTime = findViewById(R.id.tv_timer);
 
-        progressBar.setMax(600);
-        progressBar.setProgress(300
-        );
+        progressBar.setMax(10);
+        progressBar.setProgress(10);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                timer = new CountDownTimer(5000 + 100,1000) {
+                timer = new CountDownTimer(10000 + 100,1000) {
                     @Override
                     public void onTick(long l) {
+
+                       mySeconds = (int)l;
+                       tvTime.setText(mySeconds/1000 + "");
+                       progressBar.setProgress(mySeconds/1000);
 
                     }
 
                     @Override
                     public void onFinish() {
 
+                        tvTime.setText("Done");
+                        progressBar.setProgress(0);
                     }
-                };
+                }.start();
 
             }
         });
